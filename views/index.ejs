@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Y54.Z09</title>
+	<link rel="shortcut icon" href="/public/title.png" type="image/png">
+	<link rel="stylesheet" type="text/css" href="public/css.css">
+	<script type="text/javascript" src="public/jquery.js"></script>
+	<script type="text/javascript" src="public/createCilindr.js"></script>
+	<script type="text/javascript" src="public/createCilindrWithFask.js"></script>
+	<script type="text/javascript" src="public/createCube.js"></script>
+	<script type="text/javascript" src="public/createPower.js"></script>
+	<style type="text/css">.classGeometry{display: none;}</style>
+	<script type="text/javascript">
+		function ready(){
+			$(".beforeLoading").css("display", "none");
+			$(".classGeometry").css("display", "inline-block");
+		}
+		document.addEventListener("DOMContentLoaded", ready);
+	</script>
+</head>
+<body>
+	<div class="beforeLoading" style="margin-top: 300px; margin-left: 300px;">Ожидайте, загружаем содержимое...</div>
+	<div class="add_elem">
+		<select name="geometry" id="geometry" class="classGeometry">
+			<option selected value ="0">Выбрать фигуру</option>
+			<option value="1">Цилиндр</option>
+			<option value="2">Куб</option>
+			<option value="3">Вал с фаской</option>
+		</select>
+		<button class="checkGeomentry classGeometry" onclick="checkGeomentry()">Ok</button>
+		<div class = "addCilindrParams">
+			<br />
+			<br />
+			<div class="sometext">Имя фигуры</div>
+			<div class = "addCilindrName">
+				<input type="text" id="cilindrName"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Высота</div>
+			<div class = "addCilindrHeight">
+				<input type="number" min="50" max="500" step="1" id="cilindrHeight"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Ширина</div>
+			<div class = "addCilindrWidth">
+				<input type="number" min="50" max="500" step="1" id="cilindrWidth"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Влево</div>
+			<div class = "addCilindrToLeft">
+				<input type="number" min="-500" max="500" step="1" id="cilindrToLeft"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Вниз</div>
+			<div class = "addCilindrToDown">
+				<input type="number" min="-500" max="500" step="1" id="cilindrToDown"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Вокруг X</div>
+			<div class = "addCilindrRoundX">
+				<input type="number" min="-500" max="500" step="1" id="cilindrRoundX"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Вокруг Y</div>
+			<div class = "addCilindrRoundY">
+				<input type="number" min="-500" max="500" step="1" id="cilindrRoundY"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Вокруг Z</div>
+			<div class = "addCilindrRoundZ">
+				<input type="number" min="-500" max="500" step="1" id="cilindrRoundZ"> 
+			</div>
+			<br />
+			<br />
+			<div class = "sometext">Тело-</div>
+			<div class = "addCilindrBool">
+				<input type = "checkbox" id = "cilindrBool">
+			</div>
+		</div>
+
+		<div class = "addFaskParams">
+			<br />
+			<br />
+			<div class="sometext">Имя фигуры</div>
+			<div class = "addFaskName">
+				<input type="text" id="faskName"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Высота</div>
+			<div class = "addFaskHeight">
+				<input type="number" min="50" max="500" step="1" id="faskHeight"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Ширина</div>
+			<div class = "addFaskWidth">
+				<input type="number" min="50" max="500" step="1" id="faskWidth"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Влево</div>
+			<div class = "addFaskToLeft">
+				<input type="number" min="-500" max="500" step="1" id="faskToLeft"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Вниз</div>
+			<div class = "addFaskToDown">
+				<input type="number" min="-500" max="500" step="1" id="faskToDown"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">ВокругX</div>
+			<div class = "addFaskRoundX">
+				<input type="number" min="-500" max="500" step="1" id="faskRoundX"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">ВокругY</div>
+			<div class = "addFaskRoundY">
+				<input type="number" min="-500" max="500" step="1" id="faskRoundY"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">ВокругZ</div>
+			<div class = "addFaskRoundZ">
+				<input type="number" min="-500" max="500" step="1" id="faskRoundZ"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Фаска</div>
+			<div class = "addFaskRange">
+				<input type="number" min="0" max="50" step="1" id="faskRange"> 
+			</div>
+			<br />
+			<br />
+			<select name="bottop" id="bottop">
+				<option selected value ="0">Выбрать направление</option>
+				<option value="1">top</option>
+				<option value="2">bottom</option>
+			</select>
+			<!--<br />
+			<br />
+			<div class = "sometext">Тело-</div>
+			<div class = "addFaskBool">
+				<input type = "checkbox" id = "faskBool">
+			</div>-->
+		</div>
+
+		<div class = "addCubeParams">
+			<br />
+			<br />
+			<div class="sometext">Имя фигуры</div>
+			<div class = "addCubeName">
+				<input type="text" id="cubeName"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Высота</div>
+			<div class = "addCubeHeight">
+				<input type="number" min="50" max="500" step="1" id="cubeHeight"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Ширина</div>
+			<div class = "addCubeWidth">
+				<input type="number" min="50" max="500" step="1" id="cubeWidth"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Глубина</div>
+			<div class = "addCubeDepth">
+				<input type="number" min="50" max="500" step="1" id="cubeDepth"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Влево</div>
+			<div class = "addCubeToLeft">
+				<input type="number" min="-500" max="500" step="1" id="cubeToLeft"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Вниз</div>
+			<div class = "addCubeToDown">
+				<input type="number" min="-500" max="500" step="1" id="cubeToDown"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">Вдаль</div>
+			<div class = "addCubeToDepth">
+				<input type="number" min="-500" max="500" step="1" id="cubeToDepth"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">ВокругX</div>
+			<div class = "addCubeRoundX">
+				<input type="number" min="-500" max="500" step="1" id="cubeRoundX"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">ВокругY</div>
+			<div class = "addCubeRoundY">
+				<input type="number" min="-500" max="500" step="1" id="cubeRoundY"> 
+			</div>
+			<br />
+			<br />
+			<div class="sometext">ВокругZ</div>
+			<div class = "addCubeRoundZ">
+				<input type="number" min="-500" max="500" step="1" id="cubeRoundZ"> 
+			</div>
+			<br />
+			<br />
+			<div class = "sometext">Тело-</div>
+			<div class = "addCubeBool">
+				<input type = "checkbox" id = "cubeBool">
+			</div>
+		</div>
+
+
+		<button onclick="check()" class="buttonAdd">Enter</button>
+	</div>
+	<center>
+	</center>
+
+	<script type="text/javascript">
+		var container = document.createElement('div');
+		container.className = "container";
+		document.querySelector('center').appendChild(container);
+		//$(".container").css("position", "absolute");
+		//$("."+index+"container").css("margin-left", ($("body").css("width").split('px')[0]/2-width/2-toleft)+"px");
+		$(".container").css("margin-top", 200+"px");
+		$(".container").css("width", 300+"px");
+		$(".container").css("height", 300+"px");
+		$(".container").css("transform-style", "preserve-3d");
+		$(".container").css("perspective", "100000px");
+		//$(".container").css("background-color", "red");
+		/*
+		var power1 = new createPower("pow1", 200, -200, 0);
+		var cil1 = new createCilindr("cil1", 200, 200, 0, 0, 0, 0, 0, false); 
+*/
+
+		var cil1 = new createCilindr("cil1", 300, 52, 0, 0, 0, 0, 0, false);
+		var cil2 = new createCilindr("cil2", 320, 88, 0, -70, 0, 0, 0, false);
+		var fask1 = new createCilindrWithFask("fask1", 400, 40, 0, -137, 0, 0, 0, "top", 20);
+		var cil3 = new createCilindr("cil3", 100, 30, 0, -174, 0, 0, 0, false);
+		var fask2 = new createCilindrWithFask("fask2", 120, 50, 0, -215, 0, 0, 0, "top", 10);
+		var cil4 = new createCilindr("cil4", 272, 76, 0, -12, 0, 0, 0, true);
+		var cil5 = new createCilindr("cil5", 210, 20, 0, -62, 0, 0, 0, true);
+		var cil6 = new createCilindr("cil6", 180, 36, 0, -92, 0, 0, 0, true);
+		var cil7 = new createCilindr("cil7", 140, 20, 0, -120, 0, 0, 0, true);
+		var cil8 = new createCilindr("cil8", 90, 108, 0, -185, 0, 0, 0, true);
+		var cil9 = new createCilindr("cil9", 140, 20, 0, (0-120), 0, 0, 0, false);
+		var cil10 = new createCilindr("cil10", 90, 108, 0, (-66-120), 0, 0, 0, false);
+		var cil11 = new createCilindr("cil11", 28, 128, 0, (-54-120), 0, 0, 0, false);
+		var fask3 = new createCilindrWithFask("fask3", 20, 140, 0, (0-40), 0, 0, 0, "bottom", 4);
+		var cil12 = new createCilindr("cil12", 28, 134, 0, (-139-40), 0, 0, 0, false);
+		var cil13 = new createCilindr("cil13", 12, 6, 0, (-211-40), 0, 0, 0, false);
+		var cil14 = new createCilindr("cil14", 140, 60, 0, (-40-40), 0, 0, 0, false);
+		var cil15 = new createCilindr("cil15", 22, 60, 0, (-40-40), 0, 0, 0, true);
+		var cil16 = new createCilindr("cil16", 168, 20, 0, (-20-40), 0, 0, 0, false);
+		var cil17 = new createCilindr("cil17", 180, 40, 0, (-50-40), 0, 0, 0, false);
+		var cil18 = new createCilindr("cil18", 140, 60, 0, (-40-40), 0, 0, 0, true);
+		//index, width, height, depth, toleft, todown, roundX, roundY, roundZ, bool
+		//0.325
+		var cil19 = new createCilindr("cil19", 61, 196, 0, (0+80-25), 0, 0, 0, false);
+		var cub1 = new createCube("cub1", 61, 32, 30.5, -2, (-57+80-25), 0, 0, 0, true, -12);
+		var cil20 = new createCilindr("cil20", 20, 76, 0, (-60+80-25), 0, 0, 0, true);
+		var cil21 = new createCilindr("cil21", 34, 120, 0, (37+80-25), 0, 0, 0, true);
+		var cub2 = new createCube("cub2", 61, 110, 17, -2, (40+80-25), 0, 0, 0, true, 0);
+		var cub3 = new createCube("cub3", 61, 110, 17, -2, (40+80-25), 0, 90, 0, true, 0);
+
+		var cil22 = new createCilindr("cil22", 61, 6, 0, (0-45), 0, 0, 0, false);
+		var cil23 = new createCilindr("cil23", 20, 6, 0, (0-45), 0, 0, 0, true);
+
+		var cilindres = [];
+		var cubes = [];
+		var fask = [];
+		var cilindrNames = [];
+		var faskNames = [];
+		var cubeNames = ["cu1"];
+		var cilindrHeight = document.getElementById("cilindrHeight");
+		var cilindrWidth = document.getElementById("cilindrWidth");
+		var cilindrToLeft = document.getElementById("cilindrToLeft");
+		var cilindrToDown = document.getElementById("cilindrToDown");
+		var cilindrRoundX = document.getElementById("cilindrRoundX");
+		var cilindrRoundY = document.getElementById("cilindrRoundY");
+		var cilindrRoundZ = document.getElementById("cilindrRoundZ");
+		var cilindrName = document.getElementById("cilindrName");
+		var cilindrBool = document.getElementById("cilindrBool");
+
+
+		var faskHeight = document.getElementById("faskHeight");
+		var faskWidth = document.getElementById("faskWidth");
+		var faskToLeft = document.getElementById("faskToLeft");
+		var faskToDown = document.getElementById("faskToDown");
+		var faskRoundX = document.getElementById("faskRoundX");
+		var faskRoundY = document.getElementById("faskRoundY");
+		var faskRoundZ = document.getElementById("faskRoundZ");
+		var faskName = document.getElementById("faskName");
+		var faskRange = document.getElementById("faskRange");
+		//var faskBool = document.getElementById("faskBool");
+
+
+		var cubeHeight = document.getElementById("cubeHeight");
+		var cubeWidth = document.getElementById("cubeWidth");
+		var cubeDepth = document.getElementById("cubeDepth");
+		var cubeToLeft = document.getElementById("cubeToLeft");
+		var cubeToDown = document.getElementById("cubeToDown");
+		var cubeRoundX = document.getElementById("cubeRoundX");
+		var cubeRoundY = document.getElementById("cubeRoundY");
+		var cubeRoundZ = document.getElementById("cubeRoundZ");
+		var cubeName = document.getElementById("cubeName");
+		var cubeBool = document.getElementById("cubeBool");
+		var inNames = false;
+		function checkGeomentry(){
+			var n = document.getElementById("geometry").options.selectedIndex;
+			var txt = document.getElementById("geometry").options[n].text;
+			if (n!=-1 && n!=0){
+				if (txt == "Цилиндр"){
+					$(".addCubeParams").css("display", "none");
+					$(".addFaskParams").css("display", "none");
+					$(".addCilindrParams").css("display", "block");
+					$(".buttonAdd").css("display", "block");
+				}
+				if (txt == "Вал с фаской"){
+					$(".addCubeParams").css("display", "none");
+					$(".addCilindrParams").css("display", "none");
+					$(".addFaskParams").css("display", "block");
+					$(".buttonAdd").css("display", "block");
+				}
+				if (txt == "Куб"){
+					$(".addCilindrParams").css("display", "none");
+					$(".addFaskParams").css("display", "none");
+					$(".addCubeParams").css("display", "block");
+					$(".buttonAdd").css("display", "block");
+				}
+			}
+		}
+		function check(){
+			var n = document.getElementById("geometry").options.selectedIndex;
+			var txt = document.getElementById("geometry").options[n].text;
+			if (n!=-1 && n!=0){
+				if (txt == "Цилиндр"){
+					for (var jkk1 = 0; jkk1 < cilindrNames.length; jkk1++){
+						if (cilindrName.value == cilindrNames[jkk1]){
+							alert("Name alredy exists");
+							inNames = true;
+							break;
+						}
+					}
+					//index, width, height,toleft, todown, roundX, roundY, roundZ
+					if (inNames == false){
+						cilindrNames.push(cilindrName.value);
+						cilindres.push(new createCilindr(String(cilindrName.value), Number(cilindrWidth.value), Number(cilindrHeight.value), Number(cilindrToLeft.value), Number(cilindrToDown.value), Number(cilindrRoundX.value), Number(cilindrRoundY.value), Number(cilindrRoundZ.value), cilindrBool.checked));
+					}
+					inNames = false;
+				}
+				if (txt == "Вал с фаской"){
+					for (var jkk1 = 0; jkk1 < faskNames.length; jkk1++){
+						if (faskName.value == faskNames[jkk1]){
+							alert("Name alredy exists");
+							inNames = true;
+							break;
+						}
+					}
+					//index, width, height,toleft, todown, roundX, roundY, roundZ, where, fask
+					if (inNames == false){
+						var n1 = document.getElementById("bottop").options.selectedIndex;
+						var txt1 = document.getElementById("bottop").options[n1].text;
+						if (txt1 != "Выбрать направление"){
+							faskNames.push(faskName.value);
+							fask.push(new createCilindrWithFask(String(faskName.value), Number(faskWidth.value), Number(faskHeight.value), Number(faskToLeft.value), Number(faskToDown.value), Number(faskRoundX.value), Number(faskRoundY.value), Number(faskRoundZ.value), String(txt1), Number(faskRange.value)));
+						}
+					}
+					inNames = false;
+				}
+				if (txt == "Куб"){
+					for (var jkk1 = 0; jkk1 < cubeNames.length; jkk1++){
+						if (cubeName.value == cubeNames[jkk1]){
+							alert("Name alredy exists");
+							inNames = true;
+							break;
+						}
+					}
+					//index, width, height, depth, toleft, todown, roundX, roundY, roundZ
+					if (inNames == false){
+						cubeNames.push(cubeName.value);
+						cubes.push(new createCube(String(cubeName.value), Number(cubeWidth.value), Number(cubeHeight.value), Number(cubeDepth.value), Number(cubeToLeft.value), Number(cubeToDown.value), Number(cubeRoundX.value), Number(cubeRoundY.value), Number(cubeRoundZ.value), cubeBool.checked, Number(cubeToDepth.value)));
+					}
+					inNames = false;
+				}
+			}
+		}
+	</script>
+	<script type="text/javascript" src="public/rotateCilindr.js"></script>
+	<script type="text/javascript">
+	/*	for (var i = 135; i < 135+180; i++){
+			$(".cil1el"+(i-135)).css("background", "linear-gradient(to top, #2d2dbe, #ff0032, #2d2dbe)");
+			//$(".cil1el"+(i-135)).css("background", "linear-gradient(to top, blue, red, blue)");
+	}
+//		.cil1el136{
+//			border: 10px solid red;
+//		}*/
+	</script>
+	<!--<script type="text/javascript" src="public/rotateCilindrWithFask.js"></script>-->
+</body>
+</html>
