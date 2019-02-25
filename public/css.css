@@ -1,0 +1,64 @@
+*{
+	font-family: Arial;
+	font-size: 12pt;
+}
+body{
+	background-image: url(bg.jpg);
+	overflow: hidden;
+	width: 100vw;
+	height: 100vh;
+}
+li{
+	list-style-type: none;
+	position: absolute;
+}
+.add_elem{
+	display: inline-block;
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 15px;
+	color: white;
+}
+.addCubeToDepth, .addCubeBool, .addCilindrBool, .addFaskBool, .addCilindrName, .addFaskName, .addCilindrHeight, .addFaskHeight, .addCilindrWidth, .addFaskWidth, .addCilindrToLeft, .addFaskToLeft,.addFaskRange,.addFaskRoundY,.addFaskRoundX, .addFaskRoundZ, .addCilindrRoundX, .addCilindrRoundY, .addCilindrRoundZ, .addCilindrToDown, .addFaskToDown, .addCubeName, .addCubeHeight, .addCubeWidth, .addCubeDepth, .addCubeToLeft, .addCubeToDown, .addCubeRoundX, .addCubeRoundY, .addCubeRoundZ{
+	text-align: right;
+	display: inline-block;
+	position: absolute;
+	right: -15px;
+	
+}
+#cubeDepth, #cilindrName, #cilindrHeight, #cilindrWidth, #cilindrToLeft, #cilindrToDown, #cilindrRoundX, #cilindrRoundY, #cilindrRoundZ, #faskName, #faskHeight, #faskWidth, #faskToLeft, #faskToDown, #faskRoundX, #faskRoundY, #faskRoundZ, #faskRange, #cubeName, #cubeHeight, #cubeWidth, #cubeDepth, #cubeToLeft, #cubeToDown, #cubeRoundX, #cubeRoundY, #cubeRoundZ{
+	width: 80px;
+}
+#faskBool, #cubeBool, #cilindrBool{
+	transform: scale(1.5);
+}
+.sometext{
+	display: inline-block;
+	font-size: 14pt;
+}
+.checkGeomentry{
+	position: absolute;
+	left: 180px;
+	font-size: 10pt;
+}
+.buttonAdd{
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 120%;
+	/*display: block;*/
+	font-size: 14pt;
+	border-radius: 10px;
+	width: 80px;
+	height: 30px;
+	background: linear-gradient(45deg, #6E6F77, silver);
+}
+#geometry{
+	position: absolute;
+	left: 30px;
+	font-size: 12pt;
+}
+.addCilindrParams, .addFaskParams, .addCubeParams{
+	display: none;
+}
